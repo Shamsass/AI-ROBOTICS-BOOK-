@@ -1,0 +1,25 @@
+accelerate launch train_behavioral_clone.py \
+    --model_name_or_path="meta-llama/Llama-2-7b-chat-hf" \
+    --output_dir="llama-7b-chat-hf-behavioral-cloning" \
+    --log_with="wandb" \
+    --data_path "data/processed_data.json" \
+    --num_train_epochs 10 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 1 \
+    --gradient_accumulation_steps 1 \
+    --evaluation_strategy "steps" \
+    --eval_steps 50 \
+    --save_strategy "steps" \
+    --save_steps 50 \
+    --save_total_limit 2 \
+    --learning_rate 2e-5 \
+    --weight_decay 0. \
+    --warmup_ratio 0.03 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --include_inputs_for_metrics \
+    --tf32 True \
+    --bf16 True \
+    --max_grad_norm 1.0 \
+    --group_by_length True \
+    --gradient_checkpointing True
